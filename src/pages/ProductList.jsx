@@ -1,14 +1,11 @@
 import React, { useState, useMemo, useCallback } from 'react';
 
-// FIX: Import the whole library as a default object to avoid "Missing Export" errors
-import ReactWindow from 'react-window';
-const FixedSizeList = ReactWindow.FixedSizeList;
+// FIX: Point directly to the ESM build to fix the "Missing Export" error in Vercel/Rolldown
+import { FixedSizeList } from 'react-window/dist/index.esm.js';
 
 import SearchBox from '../components/SearchBox';
 import ExpensiveItem from '../components/ExpensiveItem';
 import { generateProducts } from '../utils';
-
-// ... keep the rest of the file exactly the same ...
 
 // Generate 2000 items once outside the component
 const allProducts = generateProducts(2000);
