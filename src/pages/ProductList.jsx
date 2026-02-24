@@ -1,7 +1,8 @@
 import React, { useState, useMemo, useCallback } from 'react';
 
 // FIX: Point directly to the ESM build to fix the "Missing Export" error in Vercel/Rolldown
-import { FixedSizeList } from 'react-window/dist/index.esm.js';
+// Change this line back to standard:
+import { FixedSizeList } from 'react-window';
 
 import SearchBox from '../components/SearchBox';
 import ExpensiveItem from '../components/ExpensiveItem';
