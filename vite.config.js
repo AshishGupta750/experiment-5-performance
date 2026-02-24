@@ -8,10 +8,4 @@ export default defineConfig({
     react(),
     visualizer({ open: true })
   ],
-  resolve: {
-    alias: {
-      // FIX: Force react-window to use the ES Module build to solve "Missing Export" error
-      'react-window': 'react-window/dist/index.esm.js',
-    },
-  },
 })

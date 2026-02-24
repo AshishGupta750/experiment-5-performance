@@ -1,9 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-
-// FIX: Point directly to the ESM build to fix the "Missing Export" error in Vercel/Rolldown
-// Change this line back to standard:
-import { FixedSizeList } from 'react-window';
-
+import { Virtuoso } from 'react-virtuoso'; // NEW: Modern virtualization library
 import SearchBox from '../components/SearchBox';
 import ExpensiveItem from '../components/ExpensiveItem';
 import { generateProducts } from '../utils';
@@ -21,19 +17,10 @@ const ProductList = () => {
 
   // useMemo to cache filtered results
   const filteredProducts = useMemo(() => {
-    console.log('Filtering products...');
     return allProducts.filter(p => 
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [searchTerm]);
-
-  // Row component for react-window
-  const Row = ({ index, style }) => (
-    <ExpensiveItem 
-      data={filteredProducts[index]} 
-      style={style} 
-    />
-  );
 
   return (
     <div style={{ padding: '20px' }}>
@@ -41,16 +28,18 @@ const ProductList = () => {
       
       <SearchBox onSearch={handleSearch} />
 
-      <div style={{ border: '1px solid #ccc' }}>
-        {/* The fixed size list renders only what is visible on screen */}
-        <FixedSizeList
-          height={600}
-          width="100%"
-          itemCount={filteredProducts.length}
-          itemSize={50}
-        >
-          {Row}
-        </FixedSizeList>
+      <div style={{ border: '1px solid #ccc', height: '600px' }}>
+        {/* Virtuoso handles the list automatically */}
+        <Virtuoso
+          style={{ height: '100%' }}
+          totalCount={filteredProducts.length}
+          itemContent={(index) => (
+            <ExpensiveItem 
+              data={filteredProducts[index]} 
+              style={{ height: '50px', width: '100%' }}
+            />
+          )}
+        />
       </div>
     </div>
   );
