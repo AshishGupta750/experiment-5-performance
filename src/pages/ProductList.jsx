@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { Virtuoso } from 'react-virtuoso'; // NEW: Modern virtualization library
+import { Virtuoso } from 'react-virtuoso'; // WE ARE USING VIRTUOSO NOW
 import SearchBox from '../components/SearchBox';
 import ExpensiveItem from '../components/ExpensiveItem';
 import { generateProducts } from '../utils';
@@ -10,12 +10,10 @@ const allProducts = generateProducts(2000);
 const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  // useCallback to prevent function recreation
   const handleSearch = useCallback((query) => {
     setSearchTerm(query);
   }, []);
 
-  // useMemo to cache filtered results
   const filteredProducts = useMemo(() => {
     return allProducts.filter(p => 
       p.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -25,11 +23,8 @@ const ProductList = () => {
   return (
     <div style={{ padding: '20px' }}>
       <h2>Virtualized Product List ({filteredProducts.length} items)</h2>
-      
       <SearchBox onSearch={handleSearch} />
-
       <div style={{ border: '1px solid #ccc', height: '600px' }}>
-        {/* Virtuoso handles the list automatically */}
         <Virtuoso
           style={{ height: '100%' }}
           totalCount={filteredProducts.length}
