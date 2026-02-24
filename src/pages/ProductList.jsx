@@ -1,8 +1,14 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { FixedSizeList } from 'react-window';
+
+// FIX: Import the whole library as a default object to avoid "Missing Export" errors
+import ReactWindow from 'react-window';
+const FixedSizeList = ReactWindow.FixedSizeList;
+
 import SearchBox from '../components/SearchBox';
 import ExpensiveItem from '../components/ExpensiveItem';
 import { generateProducts } from '../utils';
+
+// ... keep the rest of the file exactly the same ...
 
 // Generate 2000 items once outside the component
 const allProducts = generateProducts(2000);
